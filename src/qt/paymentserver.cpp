@@ -18,14 +18,12 @@
 #include <QLocalServer>
 #include <QLocalSocket>
 #include <QStringList>
-#if QT_VERSION < 0x050000
 #include <QUrl>
-#endif
 
 using namespace boost;
 
 const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString BITCOIN_IPC_PREFIX("litecoin:");
+const QString BITCOIN_IPC_PREFIX("bitcoin:");
 
 //
 // Create a name that is unique for:
@@ -34,7 +32,7 @@ const QString BITCOIN_IPC_PREFIX("litecoin:");
 //
 static QString ipcServerName()
 {
-    QString name("BitcoinQt");
+    QString name("HackercoinQt");
 
     // Append a simple hash of the datadir
     // Note that GetDataDir(true) returns a different path
@@ -106,7 +104,7 @@ PaymentServer::PaymentServer(QApplication* parent) : QObject(parent), saveURIs(t
     uriServer = new QLocalServer(this);
 
     if (!uriServer->listen(name))
-        qDebug() << tr("Cannot start litecoin: click-to-pay handler");
+        qDebug() << tr("Cannot start hackercoin: click-to-pay handler");
     else
         connect(uriServer, SIGNAL(newConnection()), this, SLOT(handleURIConnection()));
 }
